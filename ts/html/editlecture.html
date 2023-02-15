@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container">
+
+    </div>
+</body>
+</html>
+<script>
+    let lec=+JSON.parse(localStorage.getItem("editLec"))
+    let allLec=JSON.parse(localStorage.getItem("lect_detail"))
+    let myEditLec=allLec[lec]
+    // let myIndex=allLec.findIndex((el)=>el.createdBy==lec.createdBy)
+    console.log(myEditLec)
+
+    let container=document.querySelector("#container")
+    let div=document.createElement("div")
+    let input1=document.createElement("input")
+    input1.setAttribute("value",myEditLec.title)
+    let input2=document.createElement("input")
+    input2.setAttribute("value",myEditLec.video)
+    let input3=document.createElement("input")
+    input3.setAttribute("value",myEditLec.description)
+    let input4=document.createElement("input")
+    input4.setAttribute("value",myEditLec.role)
+    let btn=document.createElement("button")
+    btn.addEventListener("click",()=>{
+            let obj={
+            title:input1.value,
+            description:input2.value,
+            video:input3.value,
+            role:input4.value,
+            createdBy:JSON.parse(localStorage.getItem("editLecUser")).createdBy,
+            timeOfCreation:new Date()
+        }
+        console.log(obj);
+
+        allLec[lec] =obj 
+        localStorage.setItem("lect_detail",JSON.stringify(allLec))
+        window.location.href="./lecturesPage.html"
+    
+    })
+    btn.innerText="Update"
+    div.append(input1,input2,input3,input4,btn)
+    container.append(div)
+
+</script>

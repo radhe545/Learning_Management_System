@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container"></div>
+</body>
+</html>
+<script>
+   let editStu=JSON.parse(localStorage.getItem("pdi_stu"))
+    let allStu=JSON.parse(localStorage.getItem("pdi_stu_info"))
+    let findIndex=allStu.findIndex((el)=>el.username==editStu.username)
+    console.log(findIndex);
+    console.log(allStu);
+    let cont=document.getElementById("container")
+    let main_div=document.createElement("div")
+    let input1=document.createElement("input")
+    input1.setAttribute("value",editStu.username)
+    let input2=document.createElement("input")
+    input2.setAttribute("value",editStu.profilepic)
+    let input3=document.createElement("input")
+    input3.setAttribute("value",editStu.role)
+    let input4=document.createElement("input")
+    input4.setAttribute("value",editStu.state)
+    let input5=document.createElement("input")
+    input5.setAttribute("value",editStu.city)
+    let btn=document.createElement("button")
+
+    btn.innerText="Update Profile"
+    btn.addEventListener("click",()=>{
+        let updatedProfile={
+             city:input5.value,
+             dob:editStu.dob,
+             email:editStu.email,
+             gender:editStu.gender,
+             mobile:editStu.mobile,
+             password:editStu.password,
+             profilepic:input2.value,
+             role:input3.value,
+             state:input4.value,
+             toj:editStu.toj,
+             username:input1.value
+            
+        }
+        allStu[findIndex]=updatedProfile
+        console.log(allStu,updatedProfile);
+        localStorage.setItem("pdi_stu_info",JSON.stringify(allStu))
+        localStorage.setItem("pdi_stu_info",JSON.stringify(editStu))
+        alert("User Detail has been updated")
+        window.location.href="./stuProfile.html"
+
+    })
+
+    main_div.append(input1,input2,input3,input4,input5,btn)
+
+    cont.append(main_div)
+
+</script>
